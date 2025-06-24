@@ -1,0 +1,35 @@
+# Wikipedia Article Evaluator Configuration
+# Application Logic & Business Rules (Same across all environments)
+
+# Evaluation Logic & Scoring - Business Rules
+evaluation:
+  quality_threshold: 60
+  max_article_length: 50000
+  min_article_length: 50
+  
+  # Weighted scoring based on Wikipedia policy importance
+  weights:
+    npov_score: 0.4          # Neutral Point of View - Most critical
+    verifiability_score: 0.35    # Sources and citations
+    original_research_score: 0.25   # No original research
+
+  # Scoring ranges for feedback
+  scoring_ranges:
+    excellent: [90, 100]     # Minor improvements only
+    good: [70, 89]          # Some improvements needed
+    needs_work: [50, 69]    # Significant revision required
+    major_issues: [30, 49]  # Extensive rewriting needed
+    fundamental_flaws: [0, 29]  # Complete overhaul required
+
+# OpenAI API Configuration - Application Logic
+openai:
+  model: "gpt-4.1-nano"
+  temperature: 0.4
+  timeout: 30
+  response_format: "json_object"
+
+# Application Metadata
+app:
+  title: "Wikipedia Article Alignment Evaluator"
+  description: "AI-powered tool to evaluate Wikipedia article contributions against core guidelines"
+  version: "1.0.0"
